@@ -16,6 +16,8 @@ public class ControlledEntity : MonoBehaviour
 
     CharacterController characterController;
     bool inControl = true;
+    int scareCount;
+
     public bool isInLight { get; set; }
 
     public static ControlledEntity childInstance;
@@ -40,7 +42,6 @@ public class ControlledEntity : MonoBehaviour
 
     private void Update()
     {
-
         Vector3 movement = new Vector3(Input.GetAxisRaw("Horizontal"), 0, Input.GetAxisRaw("Vertical")).normalized;
         if (!characterController.isGrounded)
         {
@@ -48,25 +49,32 @@ public class ControlledEntity : MonoBehaviour
         }
         if (inControl)
         {
-            
             if (movement != Vector3.zero)
             {
                 characterController.Move(movement * moveSpeedFactor * Time.deltaTime);
             }
-        }
-        if (isInLight)
-        {
-            if(gameObject.name == "Monster")
+            if (isInLight)
             {
-                Debug.Log("Game Over");
-                Scene scene = SceneManager.GetActiveScene();
-                SceneManager.LoadScene(scene.name);
+                if (gameObject.name == "Monster")
+                {
+                    Debug.Log("Game Over");
+                    Scene scene = SceneManager.GetActiveScene();
+                    SceneManager.LoadScene(scene.name);
+                }
+            }
+            else if (gameObject.name == "Child")
+            {
+                scareCount++;
+                if (scareCount == 3)
+                {
+                    Debug.Log("Game Over");
+                    Scene scene = SceneManager.GetActiveScene();
+                    SceneManager.LoadScene(scene.name);
+                }
+                else Push(-movement);
             }
         }
-        else if(gameObject.name == "Child")
-        {
-            Push(-movement);
-        }
+        
         Debug.Log(isInLight ? $"{gameObject.name} is in the light!" : $"{gameObject.name} is in the shadow!");
     }
 
@@ -81,5 +89,6 @@ public class ControlledEntity : MonoBehaviour
             await Task.Delay(Mathf.RoundToInt(Time.deltaTime * 1000));
         }
         inControl = true;
+        if (isInLight) scareCount = 0;
     }
 }
