@@ -11,6 +11,21 @@ public class ControlledEntity : MonoBehaviour
     CharacterController characterController;
     bool inControl = true;
 
+    public static ControlledEntity childInstance;
+    public static ControlledEntity monsterInstance;
+
+    private void Awake()
+    {
+        if (gameObject.name.Contains("Child"))
+        {
+            childInstance = this;
+        }
+        else if (gameObject.name.Contains("Monster"))
+        {
+            monsterInstance = this;
+        }
+    }
+
     private void Start()
     {
         characterController = GetComponent<CharacterController>();
