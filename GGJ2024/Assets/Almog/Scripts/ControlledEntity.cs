@@ -50,7 +50,6 @@ public class ControlledEntity : MonoBehaviour
                 characterController.Move(movement * moveSpeedFactor * Time.deltaTime);
             }
         }
-
         Debug.Log(isInLight ? $"{gameObject.name} is in the light!" : $"{gameObject.name} is in the shadow!");
     }
 

@@ -38,6 +38,7 @@ public class ShadowDetector : MonoBehaviour
             // Perform the raycast
             RaycastHit hit;
             entity.isInLight = !Physics.Raycast(ray, out hit, maxDistance, ~LayerMask.GetMask("PlayableEntity"));
+            
         }
     }
 }
