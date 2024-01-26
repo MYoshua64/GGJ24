@@ -16,10 +16,12 @@ public class Child : ControlledEntity
     [SerializeField] private Sprite unitedSprite;
     
     int scareCount;
+    public bool IsReunited { get; private set; }
     
     protected override void Start()
     {
         base.Start();
+        IsReunited = false;
         ShadowDetector.OnMonsterReunited += OnMonsterReunited;
     }
 
@@ -51,6 +53,7 @@ public class Child : ControlledEntity
             monster.gameObject.SetActive(false);
             spriteRenderer.sprite = unitedSprite;
             inControl = true;
+            IsReunited = true;
         }));
         sequence.Play();
     }

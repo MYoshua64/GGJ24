@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class End : MonoBehaviour
 {
@@ -12,22 +13,31 @@ public class End : MonoBehaviour
     };
     private void OnTriggerEnter(Collider other)
     {
-        if (enteredEntities.ContainsKey(other.name))
-        {
-            enteredEntities[other.name] = true;
-        }
+        // if (enteredEntities.ContainsKey(other.name))
+        // {
+        //     enteredEntities[other.name] = true;
+        // }
+        //
+        // foreach (bool entered in enteredEntities.Values)
+        // {
+        //     
+        //     if (!entered)
+        //     {
+        //         return;
+        //     }
+        // }
+        // Debug.Log("End of level!");
+        //trigger level end
 
-        foreach (bool entered in enteredEntities.Values)
+        if (other.TryGetComponent<Child>(out Child child))
         {
-            
-            if (!entered)
+            if (child.IsReunited)
             {
-                return;
+                // TODO: Play win sound
+                Debug.Log("End of level!");
+                SceneManager.LoadScene((SceneManager.GetActiveScene().buildIndex + 1) % SceneManager.sceneCount);
             }
         }
-        Debug.Log("End of level!");
-        //trigger level end
-        // TODO: Play win sound
     }
 
     private void OnTriggerExit(Collider other)
