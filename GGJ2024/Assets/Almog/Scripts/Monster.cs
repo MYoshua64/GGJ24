@@ -8,6 +8,7 @@ public class Monster : ControlledEntity
 {
     [SerializeField] private GameObject deathParticles;
     [SerializeField] private SpriteRenderer spriteRenderer;
+    [SerializeField] private AudioClip deathClip;
 
     // Update is called once per frame
     void Update()
@@ -26,7 +27,8 @@ public class Monster : ControlledEntity
         Debug.Log("Game Over");
         
         // TODO: add sound
-        
+        AudioSource.PlayClipAtPoint(deathClip, transform.position);
+
         deathParticles.SetActive(true);
         DOTween.Sequence()
             .Append(spriteRenderer.DOColor(Color.black, 1).SetEase(Ease.InCubic))

@@ -162,6 +162,7 @@ MonoBehaviour:
   lightDetectionTransform: {fileID: 6486955702947240282}
   deathParticles: {fileID: 6108506630610515302}
   spriteRenderer: {fileID: 3795759783447209430}
+  deathClip: {fileID: 8300000, guid: 26dc8328172e68946b76b15e803fb5e0, type: 3}
 --- !u!1 &6166068693130854166
 GameObject:
   m_ObjectHideFlags: 0
