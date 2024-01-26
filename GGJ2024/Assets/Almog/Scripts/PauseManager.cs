@@ -26,6 +26,7 @@ public class PauseManager : MonoBehaviour
     }
     public void BackToMenu()
     {
+        Time.timeScale = 1;
         SceneManager.LoadScene("UI Afraid of the dark");
     }
 }

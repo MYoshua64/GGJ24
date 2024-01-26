@@ -9,5 +9,9 @@ public class UIManager : MonoBehaviour
     {
         SceneManager.LoadScene("Experiments");
     }
-   
+    
+    public void QuitGame()
+    {
+        Application.Quit();
+    }
 }
