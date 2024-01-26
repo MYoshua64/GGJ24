@@ -10,12 +10,15 @@ using Random = UnityEngine.Random;
 
 public class Child : ControlledEntity
 {
+    [Header("Child")]
     [SerializeField] float pushTime = 0.35f;
     [SerializeField] float pushSpeedMultiplier = 5f;
     [SerializeField] private SpriteRenderer spriteRenderer;
     [SerializeField] private SpriteRenderer unitedSpriteRenderer;
     [SerializeField] private SpriteRenderer alertIconRenderer;
     [SerializeField] private AudioClip boingClip, mgsClip, reuniteClip;
+
+    int scareCount;
     public bool IsReunited { get; private set; }
     private Monster monster;
     

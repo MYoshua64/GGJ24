@@ -6,6 +6,7 @@ using UnityEngine.SceneManagement;
 
 public class Monster : ControlledEntity
 {
+    [Header("Monster")]
     [SerializeField] private GameObject deathParticles;
     [SerializeField] private SpriteRenderer spriteRenderer;
     [SerializeField] private AudioClip deathClip;

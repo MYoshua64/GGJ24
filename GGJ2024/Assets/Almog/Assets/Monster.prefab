@@ -84,6 +84,37 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!1 &3915433567263608586
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4677720055077788720}
+  m_Layer: 8
+  m_Name: Raycast Origin
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4677720055077788720
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3915433567263608586}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: -0.53, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 4743965287899401155}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &5000001069692629936
 GameObject:
   m_ObjectHideFlags: 0
@@ -118,6 +149,7 @@ Transform:
   - {fileID: 3808400927608337777}
   - {fileID: 6486955702947240282}
   - {fileID: 7824910380504849429}
+  - {fileID: 4677720055077788720}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!143 &3255750077782367956
@@ -160,6 +192,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   moveSpeedFactor: 3
   lightDetectionTransform: {fileID: 6486955702947240282}
+  pushableLayerMask:
+    serializedVersion: 2
+    m_Bits: 512
+  pushRaycastDistance: 1
+  raycastOrigin: {fileID: 4677720055077788720}
   deathParticles: {fileID: 6108506630610515302}
   spriteRenderer: {fileID: 3795759783447209430}
   deathClip: {fileID: 8300000, guid: 26dc8328172e68946b76b15e803fb5e0, type: 3}

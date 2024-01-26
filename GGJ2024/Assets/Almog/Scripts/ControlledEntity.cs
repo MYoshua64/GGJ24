@@ -20,7 +20,15 @@ public class ControlledEntity : MonoBehaviour
 
     public static ControlledEntity childInstance;
     public static ControlledEntity monsterInstance;
+    private Vector3 speedFactor;
 
+    [Header("Pushing")]
+    [SerializeField] private LayerMask pushableLayerMask = 512;
+    [SerializeField] protected float pushRaycastDistance = 1f;
+    [SerializeField] Transform raycastOrigin;
+
+    public Vector3 SpeedFactor => speedFactor;
+    
     private void Awake()
     {
         if (gameObject.name.Contains("Child"))
@@ -60,6 +68,29 @@ public class ControlledEntity : MonoBehaviour
         if (walkDirection != Vector3.zero)
         {
             characterController.Move(walkDirection * moveSpeedFactor * Time.deltaTime);
+            if (walkDirection != Vector3.zero)
+            {
+                speedFactor = walkDirection * moveSpeedFactor * Time.deltaTime;
+                characterController.Move(speedFactor);
+            }
         }
+        HandlePushing();
+    }
+
+    protected void HandlePushing()
+    {
+        if (Physics.Raycast(raycastOrigin.position, SpeedFactor, out RaycastHit hitInfo, pushRaycastDistance, pushableLayerMask))
+        {
+            if (hitInfo.collider.TryGetComponent<MovableObject>(out MovableObject movableObject))
+            {
+                movableObject.Move(SpeedFactor, this);
+            }
+        }
+    }
+    
+    private void OnDrawGizmos()
+    {
+        Gizmos.color = Color.red;
+        Gizmos.DrawRay(raycastOrigin.position, SpeedFactor.normalized * pushRaycastDistance);
     }
 }
