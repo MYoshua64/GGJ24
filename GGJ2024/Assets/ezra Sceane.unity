@@ -242,7 +242,7 @@ GameObject:
   - component: {fileID: 20414644}
   - component: {fileID: 20414643}
   m_Layer: 7
-  m_Name: Capsule
+  m_Name: Child Body
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2654,7 +2654,7 @@ Transform:
   m_GameObject: {fileID: 1066580396}
   serializedVersion: 2
   m_LocalRotation: {x: 0.7071068, y: -0, z: -0, w: 0.7071068}
-  m_LocalPosition: {x: 0, y: 0.22, z: 0.46}
+  m_LocalPosition: {x: 0, y: 0.22, z: 0}
   m_LocalScale: {x: 0.2, y: 0.20000003, z: 0.20000003}
   m_ConstrainProportionsScale: 1
   m_Children: []
@@ -2893,7 +2893,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1290161411}
   - component: {fileID: 1290161413}
-  - component: {fileID: 1290161412}
+  - component: {fileID: 1290161414}
   m_Layer: 8
   m_Name: Monster
   m_TagString: Untagged
@@ -2918,22 +2918,6 @@ Transform:
   - {fileID: 565256789}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1290161412
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1290161410}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ba5117890d571014bb47b58e37f56939, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  moveSpeedFactor: 3
-  lightDetectionTransform: {fileID: 565256789}
-  pushTime: 0.35
-  pushSpeedMultiplier: 5
 --- !u!143 &1290161413
 CharacterController:
   m_ObjectHideFlags: 0
@@ -2960,6 +2944,20 @@ CharacterController:
   m_SkinWidth: 0.08
   m_MinMoveDistance: 0.001
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &1290161414
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1290161410}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 085abafc863072b4ebee53f2c7b137cc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  moveSpeedFactor: 3
+  lightDetectionTransform: {fileID: 565256789}
 --- !u!1 &1339539986
 GameObject:
   m_ObjectHideFlags: 0
@@ -3227,8 +3225,8 @@ Transform:
   m_GameObject: {fileID: 1409353693}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 2.878, y: 0.78, z: 0.6156}
-  m_LocalScale: {x: 6.3535805, y: 2.5666, z: 2.221195}
+  m_LocalPosition: {x: 2.878, y: 0.78, z: 0.4776}
+  m_LocalScale: {x: 6.3535805, y: 2.5666, z: 2.4970675}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -3621,7 +3619,7 @@ GameObject:
   - component: {fileID: 1566839107}
   - component: {fileID: 1566839106}
   m_Layer: 7
-  m_Name: Capsule (1)
+  m_Name: Child Head
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4094,15 +4092,15 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1982158155}
-  - component: {fileID: 1982158154}
   - component: {fileID: 1982158153}
+  - component: {fileID: 1982158156}
   m_Layer: 7
   m_Name: Child
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!143 &1982158153
 CharacterController:
   m_ObjectHideFlags: 0
@@ -4129,22 +4127,6 @@ CharacterController:
   m_SkinWidth: 0.08
   m_MinMoveDistance: 0.001
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &1982158154
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1982158152}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ba5117890d571014bb47b58e37f56939, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  moveSpeedFactor: 3
-  lightDetectionTransform: {fileID: 1339539987}
-  pushTime: 0.35
-  pushSpeedMultiplier: 5
 --- !u!4 &1982158155
 Transform:
   m_ObjectHideFlags: 0
@@ -4165,6 +4147,22 @@ Transform:
   - {fileID: 1938896306}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1982158156
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1982158152}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cf4492904930f204182830d8c4070cb8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  moveSpeedFactor: 3
+  lightDetectionTransform: {fileID: 1339539987}
+  pushTime: 0.35
+  pushSpeedMultiplier: 5
 --- !u!1 &1988079329
 GameObject:
   m_ObjectHideFlags: 0

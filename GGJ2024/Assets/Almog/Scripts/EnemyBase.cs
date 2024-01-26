@@ -16,7 +16,7 @@ public class EnemyBase : MonoBehaviour
             objectsToPush.Add(other.gameObject);
             if (setToExplode) return;
             Debug.Log("About to explode!");
-            WaitForExplosion();
+            //WaitForExplosion();
         }
     }
 
@@ -28,16 +28,16 @@ public class EnemyBase : MonoBehaviour
         }
     }
 
-    async Task WaitForExplosion()
-    {
-        setToExplode = true;
-        await Task.Delay(1500);
-        foreach (GameObject obj in objectsToPush)
-        {
-            Debug.Log(obj);
-            obj.GetComponentInParent<ControlledEntity>().Push((obj.transform.position - transform.position).normalized);
-        }
-        setToExplode = false;
-        //Destroy(gameObject);
-    }
+    //async Task WaitForExplosion()
+    //{
+    //    setToExplode = true;
+    //    await Task.Delay(1500);
+    //    foreach (GameObject obj in objectsToPush)
+    //    {
+    //        Debug.Log(obj);
+    //        obj.GetComponentInParent<ControlledEntity>().Push((obj.transform.position - transform.position).normalized);
+    //    }
+    //    setToExplode = false;
+    //    //Destroy(gameObject);
+    //}
 }

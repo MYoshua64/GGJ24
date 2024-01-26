@@ -40,7 +40,11 @@ public class ShadowDetector : MonoBehaviour
             // Perform the raycast
             RaycastHit hit;
             entity.isInLight = !Physics.Raycast(ray, out hit, maxDistance, ~LayerMask.GetMask(entity.gameObject.name));
-            
+            if (hit.collider != null && hit.collider.name.Contains("Child"))
+            {
+                Debug.Log("Reunited!");
+                enabled = false;
+            }
         }
     }
 }

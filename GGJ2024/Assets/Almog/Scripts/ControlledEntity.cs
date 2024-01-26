@@ -7,19 +7,14 @@ using UnityEngine.SceneManagement;
 
 public class ControlledEntity : MonoBehaviour
 {
-    [SerializeField] float moveSpeedFactor = 3.0f;
+    [SerializeField] protected float moveSpeedFactor = 3.0f;
 
     [SerializeField] Transform lightDetectionTransform;
 
-    [SerializeField] float pushTime = 0.35f;
-    [SerializeField] float pushSpeedMultiplier = 5f;
-
     public Vector3 lightDetectionPoint => lightDetectionTransform.position;
-    Vector3 walkDirection;
-
-    CharacterController characterController;
-    bool inControl = true;
-    int scareCount;
+    protected Vector3 walkDirection;
+    protected CharacterController characterController;
+    protected bool inControl = true;
 
     public bool isInLight { get; set; }
 
@@ -43,52 +38,31 @@ public class ControlledEntity : MonoBehaviour
         characterController = GetComponent<CharacterController>();
     }
 
-    private void Update()
+    //protected virtual void Update()
+    //{
+    //    walkDirection = new Vector3(Input.GetAxisRaw("Horizontal"), 0, Input.GetAxisRaw("Vertical")).normalized;
+    //    if (!characterController.isGrounded)
+    //    {
+    //        characterController.Move(Vector3.up * Physics.gravity.y * Time.deltaTime);
+    //    }
+    //    if (inControl)
+    //    {
+    //        if (walkDirection != Vector3.zero)
+    //        {
+    //            characterController.Move(walkDirection * moveSpeedFactor * Time.deltaTime);
+    //        }
+    //    }
+    //}
+
+    protected void HandleMovement()
     {
-        Vector3 movement = new Vector3(Input.GetAxisRaw("Horizontal"), 0, Input.GetAxisRaw("Vertical")).normalized;
-        if (!characterController.isGrounded)
-        {
-            characterController.Move(Vector3.up * Physics.gravity.y * Time.deltaTime);
-        }
+        walkDirection = new Vector3(Input.GetAxisRaw("Horizontal"), 0, Input.GetAxisRaw("Vertical")).normalized;
         if (inControl)
         {
-            if (movement != Vector3.zero)
+            if (walkDirection != Vector3.zero)
             {
-                characterController.Move(movement * moveSpeedFactor * Time.deltaTime);
-            }
-            if (isInLight)
-            {
-                if (gameObject.name == "Monster")
-                {
-                    Debug.Log("Game Over");
-                    Scene scene = SceneManager.GetActiveScene();
-                    SceneManager.LoadScene(scene.name);
-                }
-            }
-            else if (gameObject.name == "Child")
-            {
-                scareCount++;
-                if (scareCount == 3)
-                {
-                    Debug.Log("Game Over");
-                    Scene scene = SceneManager.GetActiveScene();
-                    SceneManager.LoadScene(scene.name);
-                }
-                else Push(-movement);
+                characterController.Move(walkDirection * moveSpeedFactor * Time.deltaTime);
             }
         }
-    }
-
-    public async Task Push(Vector3 direction)
-    {
-        inControl = false;
-        float startTime = Time.time;
-        while (Time.time < startTime + pushTime)
-        {
-            characterController.Move(direction * Time.deltaTime * moveSpeedFactor * pushSpeedMultiplier);
-            await Task.Delay(Mathf.RoundToInt(Time.deltaTime * 1000));
-        }
-        inControl = true;
-        if (isInLight) scareCount = 0;
     }
 }
