@@ -14,6 +14,7 @@ public class Child : ControlledEntity
     [SerializeField] private Monster monster;
     [SerializeField] private SpriteRenderer spriteRenderer;
     [SerializeField] private SpriteRenderer unitedSpriteRenderer;
+    [SerializeField] private SpriteRenderer alertIconRenderer;
     
     int scareCount;
     public bool IsReunited { get; private set; }
@@ -71,7 +72,16 @@ public class Child : ControlledEntity
                 Scene scene = SceneManager.GetActiveScene();
                 SceneManager.LoadScene(scene.name);
             }
-            else Push(-walkDirection);
+            else
+            {
+                Sequence popup = DOTween.Sequence();
+                alertIconRenderer.gameObject.SetActive(true);
+                alertIconRenderer.color = Color.white;
+                popup.Append(alertIconRenderer.transform.DOShakeScale(0.5f, alertIconRenderer.transform.lossyScale * 1.01f))
+                    .Append((alertIconRenderer.DOFade(0, 0.3f)).SetDelay(0.3f));
+                popup.Play();
+                Push(-walkDirection);
+            }
         }
     }
 
