@@ -34,7 +34,7 @@ public class Monster : ControlledEntity
             .Append(spriteRenderer.DOColor(Color.black, 1).SetEase(Ease.InCubic))
             .Join(transform.DOShakeScale(0.5f, transform.lossyScale * 1.01f))
             .Join(transform.DOShakePosition(1f, 0.15f))
-            .Join(transform.DOShakeRotation(1f, 0.5f)).AppendInterval(2).OnComplete(() =>
+            .Join(transform.DOShakeRotation(1f, 0.5f)).AppendInterval(1).OnComplete(() =>
             {
                 Scene scene = SceneManager.GetActiveScene();
                 SceneManager.LoadScene(scene.name);
