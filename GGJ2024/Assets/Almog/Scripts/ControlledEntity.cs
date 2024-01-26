@@ -11,6 +11,9 @@ public class ControlledEntity : MonoBehaviour
 
     [SerializeField] Transform lightDetectionTransform;
 
+    [SerializeField] float pushTime = 0.35f;
+    [SerializeField] float pushSpeedMultiplier = 5f;
+
     public Vector3 lightDetectionPoint => lightDetectionTransform.position;
     Vector3 walkDirection;
 
@@ -75,7 +78,7 @@ public class ControlledEntity : MonoBehaviour
             }
         }
         
-        Debug.Log(isInLight ? $"{gameObject.name} is in the light!" : $"{gameObject.name} is in the shadow!");
+       
     }
 
     public async Task Push(Vector3 direction)
@@ -83,9 +86,9 @@ public class ControlledEntity : MonoBehaviour
         Debug.Log($"{gameObject.name} should be pushed!");
         inControl = false;
         float startTime = Time.time;
-        while (Time.time < startTime + 0.35f)
+        while (Time.time < startTime + pushTime)
         {
-            characterController.Move(direction * Time.deltaTime * moveSpeedFactor * 5f);
+            characterController.Move(direction * Time.deltaTime * moveSpeedFactor * pushSpeedMultiplier);
             await Task.Delay(Mathf.RoundToInt(Time.deltaTime * 1000));
         }
         inControl = true;
