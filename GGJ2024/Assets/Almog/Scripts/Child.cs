@@ -13,7 +13,7 @@ public class Child : ControlledEntity
     [SerializeField] float pushSpeedMultiplier = 5f;
     [SerializeField] private Monster monster;
     [SerializeField] private SpriteRenderer spriteRenderer;
-    [SerializeField] private Sprite unitedSprite;
+    [SerializeField] private SpriteRenderer unitedSpriteRenderer;
     
     int scareCount;
     public bool IsReunited { get; private set; }
@@ -51,7 +51,8 @@ public class Child : ControlledEntity
         sequence.Append(monsterTransform.DOMove(transform.position, 0.5f).SetEase(Ease.InExpo).OnComplete(() =>
         {
             monster.gameObject.SetActive(false);
-            spriteRenderer.sprite = unitedSprite;
+            spriteRenderer.gameObject.SetActive(false);
+            unitedSpriteRenderer.gameObject.SetActive(true);
             inControl = true;
             IsReunited = true;
         }));
