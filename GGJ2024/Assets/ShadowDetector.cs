@@ -26,6 +26,8 @@ public class ShadowDetector : MonoBehaviour
             // Get the point you want to check for shadows
             Vector3 pointToCheck = entity.lightDetectionPoint;
 
+            Debug.DrawLine(transform.position, pointToCheck);
+
             // Calculate the direction from the point to the light source
             Vector3 lightDirection = lightSource.transform.position - pointToCheck;
 
@@ -37,7 +39,7 @@ public class ShadowDetector : MonoBehaviour
 
             // Perform the raycast
             RaycastHit hit;
-            entity.isInLight = !Physics.Raycast(ray, out hit, maxDistance, ~LayerMask.GetMask("PlayableEntity"));
+            entity.isInLight = !Physics.Raycast(ray, out hit, maxDistance, ~LayerMask.GetMask(entity.gameObject.name));
             
         }
     }

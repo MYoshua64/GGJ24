@@ -81,7 +81,6 @@ public class ControlledEntity : MonoBehaviour
 
     public async Task Push(Vector3 direction)
     {
-        Debug.Log($"{gameObject.name} should be pushed!");
         inControl = false;
         float startTime = Time.time;
         while (Time.time < startTime + pushTime)
