@@ -35,8 +35,9 @@ public class EnemyBase : MonoBehaviour
         foreach (GameObject obj in objectsToPush)
         {
             Debug.Log(obj);
-            obj.GetComponentInParent<ControlledEntity>().Push(obj.transform.position - transform.position);
+            obj.GetComponentInParent<ControlledEntity>().Push((obj.transform.position - transform.position).normalized);
         }
-        Destroy(gameObject);
+        setToExplode = false;
+        //Destroy(gameObject);
     }
 }

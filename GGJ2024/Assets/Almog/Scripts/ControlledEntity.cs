@@ -52,7 +52,7 @@ public class ControlledEntity : MonoBehaviour
         float startTime = Time.time;
         while (Time.time < startTime + 0.35f)
         {
-            characterController.Move(direction * Time.deltaTime * moveSpeedFactor * 1.5f);
+            characterController.Move(direction * Time.deltaTime * moveSpeedFactor * 5f);
             await Task.Delay(Mathf.RoundToInt(Time.deltaTime * 1000));
         }
         inControl = true;
