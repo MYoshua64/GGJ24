@@ -7,7 +7,7 @@ public class UIManager : MonoBehaviour
 {
     public void LoadIntoGame()
     {
-        SceneManager.LoadScene("Experiments");
+        SceneManager.LoadScene("ezra Sceane");
     }
     
     public void QuitGame()
