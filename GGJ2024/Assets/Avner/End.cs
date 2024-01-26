@@ -27,6 +27,7 @@ public class End : MonoBehaviour
         }
         Debug.Log("End of level!");
         //trigger level end
+        // TODO: Play win sound
     }
 
     private void OnTriggerExit(Collider other)

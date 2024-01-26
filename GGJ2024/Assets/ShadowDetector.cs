@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -6,7 +7,7 @@ public class ShadowDetector : MonoBehaviour
 {
     // Start is called before the first frame update
     public Light lightSource;
-
+    public static Action OnMonsterReunited;
     ControlledEntity[] entities;
 
     private void Start()
@@ -44,6 +45,7 @@ public class ShadowDetector : MonoBehaviour
             {
                 Debug.Log("Reunited!");
                 enabled = false;
+                OnMonsterReunited?.Invoke();
             }
         }
     }

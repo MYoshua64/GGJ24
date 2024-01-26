@@ -33,7 +33,7 @@ public class ControlledEntity : MonoBehaviour
         }
     }
 
-    private void Start()
+    protected virtual void Start()
     {
         characterController = GetComponent<CharacterController>();
     }

@@ -1,6 +1,8 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using DG.Tweening;
 using UnityEditor.ShaderGraph;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -9,8 +11,47 @@ public class Child : ControlledEntity
 {
     [SerializeField] float pushTime = 0.35f;
     [SerializeField] float pushSpeedMultiplier = 5f;
-
+    [SerializeField] private Monster monster;
+    [SerializeField] private SpriteRenderer spriteRenderer;
+    [SerializeField] private Sprite unitedSprite;
+    
     int scareCount;
+    
+    protected override void Start()
+    {
+        base.Start();
+        ShadowDetector.OnMonsterReunited += OnMonsterReunited;
+    }
+
+    private void OnDestroy()
+    {
+        ShadowDetector.OnMonsterReunited -= OnMonsterReunited;
+    }
+
+    private void OnMonsterReunited()
+    {
+        
+        // TODO: Play sound
+        GameObject rotationPoint = new GameObject("Rotation Point");
+        Transform rotationPointTransform = rotationPoint.transform;
+        Transform monsterTransform = monster.transform;
+        rotationPointTransform.SetParent(transform);
+        rotationPointTransform.localPosition = Vector3.zero;
+        monster.enabled = false;
+        Sequence sequence = DOTween.Sequence();
+        sequence.Append(monsterTransform.DOMove(transform.position + Vector3.up * 2, 0.9f).SetEase(Ease.OutCirc).OnComplete(() =>
+        {
+            monsterTransform.SetParent(rotationPointTransform);
+        }));
+        sequence.Append(monsterTransform.DOMove(transform.position + Vector3.up * 2 + Vector3.forward, 0.5f));
+        sequence.Join(rotationPointTransform.DORotate(new Vector3(0, 1080, 0), 4.5f, RotateMode.FastBeyond360));
+        sequence.Append(monsterTransform.DOMove(transform.position, 0.5f).SetEase(Ease.InExpo).OnComplete(() =>
+        {
+            monster.gameObject.SetActive(false);
+            spriteRenderer.sprite = unitedSprite;
+        }));
+        sequence.Play();
+    }
 
     void Update()
     {
