@@ -8,4 +8,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/1.unity
     guid: 99c9720ab356a0642a771bea13969a05
+  - enabled: 1
+    path: Assets/Almog/Experiments.unity
+    guid: d5794d75941b7aa4aacf524b008d88b4
   m_configObjects: {}
