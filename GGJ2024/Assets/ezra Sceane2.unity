@@ -192,6 +192,11 @@ PrefabInstance:
       propertyPath: monster
       value: 
       objectReference: {fileID: 1911981166}
+    - target: {fileID: 8011679863869749022, guid: e71a3281fe0cb014cb7d8951786ab998,
+        type: 3}
+      propertyPath: spriteRenderer
+      value: 
+      objectReference: {fileID: 2084975313}
     - target: {fileID: 9141273814991132580, guid: e71a3281fe0cb014cb7d8951786ab998,
         type: 3}
       propertyPath: m_Name
