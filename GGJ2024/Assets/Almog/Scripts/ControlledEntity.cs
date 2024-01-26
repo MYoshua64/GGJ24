@@ -38,13 +38,13 @@ public class ControlledEntity : MonoBehaviour
 
     private void Update()
     {
+        Vector3 movement = new Vector3(Input.GetAxisRaw("Horizontal"), 0, Input.GetAxisRaw("Vertical"));
         if (!characterController.isGrounded)
         {
             characterController.Move(Vector3.up * Physics.gravity.y * Time.deltaTime);
         }
         if (inControl)
         {
-            Vector3 movement = new Vector3(Input.GetAxisRaw("Horizontal"), 0, Input.GetAxisRaw("Vertical"));
             if (movement != Vector3.zero)
             {
                 characterController.Move(movement * moveSpeedFactor * Time.deltaTime);
