@@ -77,8 +77,6 @@ public class ControlledEntity : MonoBehaviour
                 else Push(-movement);
             }
         }
-        
-       
     }
 
     public async Task Push(Vector3 direction)
