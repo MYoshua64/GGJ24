@@ -38,6 +38,7 @@ public class Child : ControlledEntity
         rotationPointTransform.SetParent(transform);
         rotationPointTransform.localPosition = Vector3.zero;
         monster.enabled = false;
+        inControl = false;
         Sequence sequence = DOTween.Sequence();
         sequence.Append(monsterTransform.DOMove(transform.position + Vector3.up * 2, 0.9f).SetEase(Ease.OutCirc).OnComplete(() =>
         {
@@ -49,6 +50,7 @@ public class Child : ControlledEntity
         {
             monster.gameObject.SetActive(false);
             spriteRenderer.sprite = unitedSprite;
+            inControl = true;
         }));
         sequence.Play();
     }

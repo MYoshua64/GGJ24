@@ -9,14 +9,12 @@ public class Monster : ControlledEntity
     [SerializeField] private GameObject deathParticles;
     [SerializeField] private SpriteRenderer spriteRenderer;
 
-    private bool isDead = false;
     // Update is called once per frame
     void Update()
     {
-        if(isDead) return;
         HandleMovement();
         Debug.Log(isInLight);
-        if (isInLight && !isDead)
+        if (isInLight && inControl)
         {
             TriggerGameOver();
         }
@@ -24,7 +22,7 @@ public class Monster : ControlledEntity
 
     private void TriggerGameOver()
     {
-        isDead = true;
+        inControl = false;
         Debug.Log("Game Over");
         
         // TODO: add sound
