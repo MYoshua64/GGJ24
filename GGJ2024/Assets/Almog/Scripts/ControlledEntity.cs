@@ -8,8 +8,13 @@ public class ControlledEntity : MonoBehaviour
 {
     [SerializeField] float moveSpeedFactor = 3.0f;
 
+    [SerializeField] Transform lightDetectionTransform;
+
+    public Vector3 lightDetectionPoint => lightDetectionTransform.position;
+
     CharacterController characterController;
     bool inControl = true;
+    public bool isInLight { get; set; }
 
     public static ControlledEntity childInstance;
     public static ControlledEntity monsterInstance;
@@ -37,12 +42,16 @@ public class ControlledEntity : MonoBehaviour
         {
             characterController.Move(Vector3.up * Physics.gravity.y * Time.deltaTime);
         }
-        if (!inControl) return;
-        Vector3 movement = new Vector3(Input.GetAxisRaw("Horizontal"), 0, Input.GetAxisRaw("Vertical"));
-        if (movement != Vector3.zero)
+        if (inControl)
         {
-            characterController.Move(movement * moveSpeedFactor * Time.deltaTime);
+            Vector3 movement = new Vector3(Input.GetAxisRaw("Horizontal"), 0, Input.GetAxisRaw("Vertical"));
+            if (movement != Vector3.zero)
+            {
+                characterController.Move(movement * moveSpeedFactor * Time.deltaTime);
+            }
         }
+
+        Debug.Log(isInLight ? $"{gameObject.name} is in the light!" : $"{gameObject.name} is in the shadow!");
     }
 
     public async Task Push(Vector3 direction)
