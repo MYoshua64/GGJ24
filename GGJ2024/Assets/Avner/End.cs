@@ -34,8 +34,9 @@ public class End : MonoBehaviour
             if (child.IsReunited)
             {
                 // TODO: Play win sound
-                Debug.Log("End of level!");
-                SceneManager.LoadScene((SceneManager.GetActiveScene().buildIndex + 1) % SceneManager.sceneCount);
+            
+                
+                SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex +1 );
             }
         }
     }
