@@ -13,6 +13,7 @@ public class Monster : ControlledEntity
     // Update is called once per frame
     void Update()
     {
+        if (!inControl) return;
         HandleMovement();
         if (isInLight && inControl)
         {

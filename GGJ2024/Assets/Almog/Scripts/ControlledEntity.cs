@@ -57,12 +57,9 @@ public class ControlledEntity : MonoBehaviour
     protected void HandleMovement()
     {
         walkDirection = new Vector3(Input.GetAxisRaw("Horizontal"), 0, Input.GetAxisRaw("Vertical")).normalized;
-        if (inControl)
+        if (walkDirection != Vector3.zero)
         {
-            if (walkDirection != Vector3.zero)
-            {
-                characterController.Move(walkDirection * moveSpeedFactor * Time.deltaTime);
-            }
+            characterController.Move(walkDirection * moveSpeedFactor * Time.deltaTime);
         }
     }
 }

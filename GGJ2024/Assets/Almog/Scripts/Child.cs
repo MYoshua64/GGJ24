@@ -17,8 +17,6 @@ public class Child : ControlledEntity
     [SerializeField] private SpriteRenderer unitedSpriteRenderer;
     [SerializeField] private SpriteRenderer alertIconRenderer;
     [SerializeField] private AudioClip boingClip, mgsClip, reuniteClip;
-    
-    int scareCount;
     public bool IsReunited { get; private set; }
     
     protected override void Start()
@@ -67,22 +65,13 @@ public class Child : ControlledEntity
 
     void Update()
     {
+        if (!inControl) return;
         HandleMovement();
         if (!isInLight)
         {
-            scareCount++;
-            if (scareCount >= 3)
-            {
-                Debug.Log("Game Over");
-                Scene scene = SceneManager.GetActiveScene();
-                SceneManager.LoadScene(scene.name);
-            }
-            else
-            {
-                PlaySoundEffect();
+            PlaySoundEffect();
 
-                Push(-walkDirection);
-            }
+            Push(-walkDirection);
         }
     }
 
@@ -114,16 +103,21 @@ public class Child : ControlledEntity
         }
     }
 
-    public async Task Push(Vector3 direction)
+    public async Task Push(Vector3 direction, float time = -1f)
     {
         inControl = false;
         float startTime = Time.time;
-       while (Time.time < startTime + pushTime)
+        if (time < 0)
+            time = pushTime;
+        while (Time.time < startTime + time)
         {
             characterController.Move(direction * Time.deltaTime * moveSpeedFactor * pushSpeedMultiplier);
             await Task.Delay(Mathf.RoundToInt(Time.deltaTime * 1000));
         }
         inControl = true;
-        if (isInLight) scareCount = 0;
+        if (!isInLight)
+        {
+            Push(-direction, pushTime - 0.1f);
+        }
     }
 }
