@@ -6,6 +6,7 @@ using DG.Tweening;
 using UnityEditor.ShaderGraph;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.Serialization;
 using Random = UnityEngine.Random;
 
 public class Child : ControlledEntity
@@ -14,7 +15,7 @@ public class Child : ControlledEntity
     [SerializeField] float pushTime = 0.35f;
     [SerializeField] float pushSpeedMultiplier = 5f;
     [SerializeField] private SpriteRenderer spriteRenderer;
-    [SerializeField] private SpriteRenderer unitedSpriteRenderer;
+    [FormerlySerializedAs("unitedSpriteRenderer")] [SerializeField] private SpriteRenderer cloudSpriteRenderer;
     [SerializeField] private SpriteRenderer alertIconRenderer;
 
     int scareCount;
@@ -47,24 +48,35 @@ public class Child : ControlledEntity
         GameObject rotationPoint = new GameObject("Rotation Point");
         Transform rotationPointTransform = rotationPoint.transform;
         Transform monsterTransform = monster.transform;
+        rotationPointTransform.localScale = Vector3.one * 2;
         rotationPointTransform.SetParent(transform);
         rotationPointTransform.localPosition = Vector3.zero;
+        monster.sequence.Kill();
         monster.enabled = false;
         inControl = false;
 
         Sequence sequence = DOTween.Sequence();
+        animationController.UpdateAnimation(Vector3.zero);
         sequence.Append(monsterTransform.DOMove(transform.position + Vector3.up * 2, 0.9f).SetEase(Ease.OutCirc).OnComplete(() =>
         {
             monsterTransform.SetParent(rotationPointTransform);
         }));
-        sequence.Append(monsterTransform.DOMove(transform.position + Vector3.up * 2 + Vector3.forward, 0.5f));
-        sequence.Join(rotationPointTransform.DORotate(new Vector3(0, 1080, 0), 4.5f, RotateMode.FastBeyond360));
-        sequence.Append(monsterTransform.DOMove(transform.position, 0.5f).SetEase(Ease.InExpo).OnComplete(() =>
+        sequence.Append(monsterTransform.DOScale(Vector3.zero, 0.8f).OnComplete(() => {     
+            monster.spriteRenderer.sprite = cloudSpriteRenderer.sprite;
+        }));
+        sequence.Append(monsterTransform.DOScale(monsterTransform.lossyScale, 0.8f));
+        
+        sequence.Append(monsterTransform.DOMove(transform.position + Vector3.up * 2.8f + Vector3.forward * 1.4f, 0.5f));
+        // sequence.Join(rotationPointTransform.DORotate(new Vector3(0, 1080, 0), 4.5f, RotateMode.FastBeyond360));
+        sequence.Join(monsterTransform.DOScale(monsterTransform.lossyScale * 0.5f, 1.5f));
+        sequence.Append(monsterTransform.DOMove(cloudSpriteRenderer.transform.position, 0.5f).SetEase(Ease.InExpo).OnComplete(() =>
         {
             AudioSource.PlayClipAtPoint(reuniteClip, transform.position);
             monster.gameObject.SetActive(false);
-            spriteRenderer.gameObject.SetActive(false);
-            unitedSpriteRenderer.gameObject.SetActive(true);
+            //spriteRenderer.gameObject.SetActive(false);
+            cloudSpriteRenderer.gameObject.SetActive(true);
+            cloudSpriteRenderer.transform.localScale = Vector3.zero;
+            cloudSpriteRenderer.transform.DOScale(Vector3.one, 0.75f).SetEase(Ease.InOutBounce);
             inControl = true;
             IsReunited = true;
         }));
