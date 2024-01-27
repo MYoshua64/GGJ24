@@ -9,6 +9,7 @@ public class ShadowDetector : MonoBehaviour
     public Light lightSource;
     public static Action OnMonsterReunited;
     ControlledEntity[] entities;
+    public Animator Door;
 
     public static ShadowDetector instance;
 
@@ -53,6 +54,8 @@ public class ShadowDetector : MonoBehaviour
                 Debug.Log("Reunited!");
                 enabled = false;
                 OnMonsterReunited?.Invoke();
+                Door.Play("door animation");
+
             }
         }
     }
