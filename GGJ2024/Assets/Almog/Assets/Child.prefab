@@ -264,7 +264,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: a8033b84c069e2347b8241fc8dd457eb, type: 3}
+  m_Sprite: {fileID: 21300000, guid: bfbc4bf4e2886ef4fa127acdaed79fa7, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -553,13 +553,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6774386337926595473}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0.099319756, y: 0, z: 0, w: 0.9950556}
   m_LocalPosition: {x: -0.017000198, y: 0.116, z: 0.072999954}
   m_LocalScale: {x: 0.33, y: 0.33, z: 0.33}
   m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 1985503430384744745}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 11.4, y: 0, z: 0}
 --- !u!212 &3478450578656587405
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -601,7 +601,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 51b0704c9371492489ddf72963791095, type: 3}
+  m_Sprite: {fileID: 21300000, guid: bfbc4bf4e2886ef4fa127acdaed79fa7, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -708,6 +708,7 @@ GameObject:
   - component: {fileID: 3460475609928493288}
   - component: {fileID: 8011679863869749022}
   - component: {fileID: 875570184279979744}
+  - component: {fileID: 8201126146702519722}
   m_Layer: 7
   m_Name: Child
   m_TagString: Untagged
@@ -778,6 +779,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moveSpeedFactor: 2
+  animationController: {fileID: 8201126146702519722}
   lightDetectionTransform: {fileID: 3782343866784826008}
   pushableLayerMask:
     serializedVersion: 2
@@ -787,6 +789,8 @@ MonoBehaviour:
   pushTime: 0.35
   pushSpeedMultiplier: 3
   spriteRenderer: {fileID: 6480149937032533767}
+  pushSpeedMultiplier: 5
+  spriteRenderer: {fileID: 3478450578656587405}
   unitedSpriteRenderer: {fileID: 5006440279039826833}
   alertIconRenderer: {fileID: 8600488837391456938}
   gaspSFX: {fileID: 8300000, guid: 8ca2d7ab3b517264191cc60175fb6961, type: 3}
@@ -794,6 +798,8 @@ MonoBehaviour:
   reuniteClip: {fileID: 8300000, guid: bbebe6864793a8147b1cd7f67fafe893, type: 3}
 --- !u!82 &875570184279979744
 AudioSource:
+--- !u!114 &8201126146702519722
+MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -888,3 +894,25 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 24f10f66fc034d7ab4a512bf11f62477, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  animationSwitchTime: 0.2
+  spriteRenderer: {fileID: 3478450578656587405}
+  frontIdle: {fileID: 21300000, guid: bfbc4bf4e2886ef4fa127acdaed79fa7, type: 3}
+  frontWalk:
+  - {fileID: 21300000, guid: d9867e60e6635c14fa37c781e0255bf1, type: 3}
+  - {fileID: 21300000, guid: 39993123e18a56246b1faf5c024a319c, type: 3}
+  rightWalk:
+  - {fileID: 21300000, guid: 79353404357984e4598f68e5b0237458, type: 3}
+  - {fileID: 21300000, guid: 2bf52f3ac4a653a4798a446e9f3394bf, type: 3}
+  leftWalk:
+  - {fileID: 21300000, guid: 631f0608eaf8d7d43b66014c2935d071, type: 3}
+  - {fileID: 21300000, guid: 3ffee8463db606d439587e35eb8da721, type: 3}
+  backWalk:
+  - {fileID: 21300000, guid: 958e7e2e59f77654e88b8912ad7a73d0, type: 3}
+  - {fileID: 21300000, guid: 982c265d13665d944b9e29aea9ac6419, type: 3}
+  currentDirection: 0
+  index: 0
+  currentAnimation: []

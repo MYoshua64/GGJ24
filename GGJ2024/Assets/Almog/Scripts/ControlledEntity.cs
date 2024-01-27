@@ -7,6 +7,7 @@ using UnityEngine.SceneManagement;
 
 public class ControlledEntity : MonoBehaviour
 {
+    [SerializeField] private CharacterAnimationController animationController;
     [SerializeField] protected float moveSpeedFactor = 3.0f;
 
     [SerializeField] Transform lightDetectionTransform;
@@ -75,6 +76,8 @@ public class ControlledEntity : MonoBehaviour
             }
         }
         HandlePushing();
+        if(animationController != null)
+            animationController.UpdateAnimation(walkDirection.normalized);
     }
 
     protected void HandlePushing()

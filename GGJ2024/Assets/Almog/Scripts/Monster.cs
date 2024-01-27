@@ -11,6 +11,15 @@ public class Monster : ControlledEntity
     [SerializeField] private SpriteRenderer spriteRenderer;
     [SerializeField] private AudioClip deathClip;
 
+    protected override void Start()
+    {
+        base.Start();
+        DOTween.Sequence().Append(spriteRenderer.transform.DOScale(spriteRenderer.transform.lossyScale * 1.15f, 0.35f)
+            .SetEase(Ease.InExpo)
+        ).AppendInterval(5).SetLoops(-1, LoopType.Yoyo);
+
+    }
+
     // Update is called once per frame
     void Update()
     {
