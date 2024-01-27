@@ -190,7 +190,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 085abafc863072b4ebee53f2c7b137cc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveSpeedFactor: 3
+  moveSpeedFactor: 2
   lightDetectionTransform: {fileID: 6486955702947240282}
   pushableLayerMask:
     serializedVersion: 2

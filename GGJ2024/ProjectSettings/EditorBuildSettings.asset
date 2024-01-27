@@ -14,4 +14,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/ezra Sceane2.unity
     guid: 1d43732a1cf1cb14abd342bf36a4c6df
+  - enabled: 1
+    path: Assets/ezra Sceane3.unity
+    guid: f7a2969d05aa966448f22e54a1d64a37
   m_configObjects: {}

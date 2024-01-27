@@ -90,7 +90,7 @@ public class Child : ControlledEntity
 
     private void PlaySoundEffect()
     {
-        int random = Random.Range(0, 7);
+        int random = Random.Range(0, 10);
         Debug.Log(random);
         AudioClip selectedClip = random <= 5 ? gaspSFX : mgsClip;
         AudioSource.PlayClipAtPoint(selectedClip, transform.position);
