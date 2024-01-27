@@ -12,12 +12,12 @@ public class Child : ControlledEntity
 {
     [SerializeField] float pushTime = 0.35f;
     [SerializeField] float pushSpeedMultiplier = 5f;
-    [SerializeField] private Monster monster;
     [SerializeField] private SpriteRenderer spriteRenderer;
     [SerializeField] private SpriteRenderer unitedSpriteRenderer;
     [SerializeField] private SpriteRenderer alertIconRenderer;
     [SerializeField] private AudioClip boingClip, mgsClip, reuniteClip;
     public bool IsReunited { get; private set; }
+    private Monster monster;
     
     protected override void Start()
     {
@@ -25,6 +25,7 @@ public class Child : ControlledEntity
         IsReunited = false;
         isInLight = true;
         ShadowDetector.OnMonsterReunited += OnMonsterReunited;
+        monster = FindObjectOfType<Monster>();
     }
 
     private void OnDestroy()
