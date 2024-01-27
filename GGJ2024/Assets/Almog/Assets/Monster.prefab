@@ -190,8 +190,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 085abafc863072b4ebee53f2c7b137cc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveSpeedFactor: 2
   animationController: {fileID: 0}
+  moveSpeedFactor: 2
   lightDetectionTransform: {fileID: 6486955702947240282}
   pushableLayerMask:
     serializedVersion: 2
@@ -201,6 +201,9 @@ MonoBehaviour:
   deathParticles: {fileID: 6108506630610515302}
   spriteRenderer: {fileID: 3795759783447209430}
   deathClip: {fileID: 8300000, guid: bee55cfb726c77b45b2d17505c5dfd92, type: 3}
+  eyes1: {fileID: 21300000, guid: 2df4de774939f2241bbb443c20c56c09, type: 3}
+  eyes2: {fileID: 21300000, guid: 97b7cb8d0c37c794f801dd964731de37, type: 3}
+  blinkInterval: 5
 --- !u!1 &6166068693130854166
 GameObject:
   m_ObjectHideFlags: 0

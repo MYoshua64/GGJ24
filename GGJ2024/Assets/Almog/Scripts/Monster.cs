@@ -8,15 +8,19 @@ public class Monster : ControlledEntity
 {
     [Header("Monster")]
     [SerializeField] private GameObject deathParticles;
-    [SerializeField] private SpriteRenderer spriteRenderer;
+    [SerializeField] public SpriteRenderer spriteRenderer;
     [SerializeField] private AudioClip deathClip;
-
+    [SerializeField] private Sprite eyes1, eyes2;
+    [SerializeField] float blinkInterval = 5;
+    public Sequence sequence;
     protected override void Start()
     {
         base.Start();
-        DOTween.Sequence().Append(spriteRenderer.transform.DOScale(spriteRenderer.transform.lossyScale * 1.15f, 0.35f)
-            .SetEase(Ease.InExpo)
-        ).AppendInterval(5).SetLoops(-1, LoopType.Yoyo);
+        sequence = DOTween.Sequence()
+            .AppendCallback(() => { spriteRenderer.sprite = eyes2;}).AppendInterval(0.5f)
+            .Append(spriteRenderer.transform.DOScale(spriteRenderer.transform.lossyScale * 1.15f, 0.35f)
+            .SetEase(Ease.InExpo).OnComplete(() => { spriteRenderer.sprite = eyes1;})
+        ).AppendInterval(blinkInterval).SetLoops(-1, LoopType.Yoyo);
 
     }
 
