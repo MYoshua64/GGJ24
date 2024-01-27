@@ -14,7 +14,6 @@ public class Monster : ControlledEntity
     void Update()
     {
         HandleMovement();
-        Debug.Log(isInLight);
         if (isInLight && inControl)
         {
             TriggerGameOver();
