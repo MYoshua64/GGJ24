@@ -16,11 +16,14 @@ public class Child : ControlledEntity
     [SerializeField] private SpriteRenderer spriteRenderer;
     [SerializeField] private SpriteRenderer unitedSpriteRenderer;
     [SerializeField] private SpriteRenderer alertIconRenderer;
-    [SerializeField] private AudioClip boingClip, mgsClip, reuniteClip;
 
     int scareCount;
+    [SerializeField] private AudioClip gaspSFX, mgsClip, reuniteClip;
     public bool IsReunited { get; private set; }
     private Monster monster;
+    private AudioSource footstepsAudio;
+
+    int escapeAttempts;
     
     protected override void Start()
     {
@@ -29,6 +32,7 @@ public class Child : ControlledEntity
         isInLight = true;
         ShadowDetector.OnMonsterReunited += OnMonsterReunited;
         monster = FindObjectOfType<Monster>();
+        footstepsAudio = GetComponent<AudioSource>();
     }
 
     private void OnDestroy()
@@ -71,6 +75,11 @@ public class Child : ControlledEntity
     {
         if (!inControl) return;
         HandleMovement();
+        if (walkDirection != Vector3.zero)
+        {
+            footstepsAudio.Play();
+        }
+        else footstepsAudio.Stop();
         if (!isInLight)
         {
             PlaySoundEffect();
@@ -82,46 +91,46 @@ public class Child : ControlledEntity
     private void PlaySoundEffect()
     {
         int random = Random.Range(0, 7);
-        AudioClip selectedClip;
-        bool displayExcalmation = false;
-        if (random <= 3)
-        {
-            selectedClip = boingClip;
-        }
-        else
-        {
-            selectedClip = mgsClip;
-            displayExcalmation = true;
-        }
+        Debug.Log(random);
+        AudioClip selectedClip = random <= 5 ? gaspSFX : mgsClip;
         AudioSource.PlayClipAtPoint(selectedClip, transform.position);
-        if (displayExcalmation)
-        {
-            Sequence popup = DOTween.Sequence();
-            alertIconRenderer.gameObject.SetActive(true);
-            alertIconRenderer.color = Color.white;
-            popup.Append(alertIconRenderer.transform.DOShakeScale(0.5f,
-                    alertIconRenderer.transform.lossyScale * 1.01f))
-                .Append((alertIconRenderer.DOFade(0, 0.3f)).SetDelay(0.3f));
-            popup.Play();
-
-        }
+        alertIconRenderer.transform.DOKill();
+        Sequence popup = DOTween.Sequence();
+        alertIconRenderer.gameObject.SetActive(true);
+        alertIconRenderer.color = Color.white;
+        popup.Append(alertIconRenderer.transform.DOShakeScale(0.5f,
+                alertIconRenderer.transform.lossyScale * 1.01f))
+            .Append((alertIconRenderer.DOFade(0, 0.3f)).SetDelay(0.3f));
+        popup.Play();
     }
 
-    public async Task Push(Vector3 direction, float time = -1f)
+    public async Task Push(Vector3 direction, bool firstCall = true, float time = 0.35f)
     {
         inControl = false;
         float startTime = Time.time;
-        if (time < 0)
-            time = pushTime;
         while (Time.time < startTime + time)
         {
             characterController.Move(direction * Time.deltaTime * moveSpeedFactor * pushSpeedMultiplier);
+            if (!firstCall && isInLight) break;
             await Task.Delay(Mathf.RoundToInt(Time.deltaTime * 1000));
         }
         inControl = true;
         if (!isInLight)
         {
-            Push(-direction, pushTime - 0.1f);
+            escapeAttempts++;
+            if (escapeAttempts > 5)
+            {
+                transform.DOShakePosition(1.5f, Vector3.right * 0.2f)
+                    .OnComplete(() =>
+                    {
+                        int sceneIndex = SceneManager.GetActiveScene().buildIndex;
+                        SceneManager.LoadScene(sceneIndex);
+                    });
+                return;
+            }
+            Vector3 directionFromLight = transform.position - ShadowDetector.instance.transform.position;
+            direction.y = 0;
+            Push(directionFromLight.normalized, false);
         }
     }
 }

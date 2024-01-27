@@ -10,6 +10,13 @@ public class ShadowDetector : MonoBehaviour
     public static Action OnMonsterReunited;
     ControlledEntity[] entities;
 
+    public static ShadowDetector instance;
+
+    private void Awake()
+    {
+        instance = this;
+    }
+
     private void Start()
     {
         entities = FindObjectsOfType<ControlledEntity>();
