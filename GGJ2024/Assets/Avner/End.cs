@@ -34,9 +34,8 @@ public class End : MonoBehaviour
             if (child.IsReunited)
             {
                 // TODO: Play win sound
-            
-                
-                SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex +1 );
+                int nextSceneIndex = SceneManager.GetActiveScene().buildIndex + 1;
+                ScreenFader.instance.FadeWithLevelLoad(nextSceneIndex % SceneManager.sceneCountInBuildSettings);
             }
         }
     }
