@@ -101,7 +101,7 @@ GameObject:
   - component: {fileID: 8306787879445429831}
   - component: {fileID: 8879701507907371450}
   m_Layer: 0
-  m_Name: DoorAnimation
+  m_Name: GameObject
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
