@@ -5,6 +5,8 @@ using UnityEngine.SceneManagement;
 
 public class End : MonoBehaviour
 {
+    [SerializeField] AudioClip successClip;
+
     // Start is called before the first frame update
     Dictionary<string, bool> enteredEntities = new Dictionary<string, bool>
     {
@@ -34,6 +36,7 @@ public class End : MonoBehaviour
             if (child.IsReunited)
             {
                 // TODO: Play win sound
+                AudioSource.PlayClipAtPoint(successClip, Camera.main.transform.position, 0.5f);
                 int nextSceneIndex = SceneManager.GetActiveScene().buildIndex + 1;
                 ScreenFader.instance.FadeWithLevelLoad(nextSceneIndex % SceneManager.sceneCountInBuildSettings);
             }
