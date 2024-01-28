@@ -9,6 +9,9 @@ EditorBuildSettings:
     path: Assets/UI Afraid of the dark.unity
     guid: 5f1200f2ed3ebe541999523527c4cbf3
   - enabled: 1
+    path: Assets/Intro.unity
+    guid: 5e2703ffdeae2504cb34169eadf502e3
+  - enabled: 1
     path: Assets/ezra Sceane 1.unity
     guid: 5169db2754e44754592730b91ba6e447
   - enabled: 1
